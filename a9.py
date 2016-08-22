@@ -5,9 +5,9 @@
         Aug 2016
    
    It is written with my own efforts and settings. You are free to use it for non-coursera works. 
-   However, it is copywrighted material and seek my persmission and coursera permission for test Datasets
+   However, it is copyrighted material. Please notify me for usage and coursera permission for test Datasets
 
-   Author: Chirag Desai
+   -Chirag Desai
 
 
 '''
@@ -26,7 +26,7 @@ uses: mb.txt by coursera
 
 '''
 
-
+DEBUG=True
 name = "mb.txt"
 emap = dict()
    
@@ -36,21 +36,36 @@ for line in handle.readlines():
     	if line.startswith( "From "):
                 broken = line.split(" ")
                 ename = broken[1]
-                #print ename
-                if 	ename in emap :
-                        emap[ename] = emap[ename]+1
-                else: 
-                        emap[ename] = 1
+                if DEBUG:
+                    print ename
+
+                #v2
+                emap[ename] = emap.get(ename, 0)+1
+
+                #v1
+                #if 	ename in emap :
+                #        emap[ename] = emap[ename]+1
+                #else: 
+                #        emap[ename] = 1
       
                     
 #print emap
 max = 0
-max_emailer = "No emails found"
+max_emailer = "No emailer found"
+emap[max_emailer]=0
+
+if DEBUG:
+    print ""
+    print "Total count emailer wise"
+    print ""
+
 
 for n , v in emap.items():
-    print n , v
+    if DEBUG:
+        print n , v
+
     if v > max :
         max_emailer = n
         max = v
-
+print ""
 print "Maximum emails by" , max_emailer, "with count", emap[max_emailer] 
